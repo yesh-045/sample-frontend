@@ -1,6 +1,6 @@
 let str=""
 const buttons=document.querySelectorAll('.button')
-function Backspace(str){
+function Backspace(){
     let len=str.length;
     return str.substring(0,len-1);
 }
@@ -20,17 +20,15 @@ buttons.forEach(button =>
         });
     });
 document.getElementById("ac").onclick=function(){
-    str=""
-    document.getElementById("text-area").textContent="";
+    str="0"
+    document.getElementById("text-area").textContent=str;
 }
 document.getElementById("c").onclick=function(){
-    if(str=="Syntax Error"){
-        console.log("HI");
+    if(str=="Syntax Error"){        
         str="";
     }
     else{
-        console.log("BI");
-    str=Backspace(str);
+    str=Backspace();
     document.getElementById("text-area").textContent=str;
 }
 }
@@ -47,7 +45,7 @@ function Result(){
 document.addEventListener('keydown',function(event){
     if(["Enter","Backspace","Shift","1","2","3","4","5","6","7","8","9","0","-","=","/",".","+","%","*"].includes (event.key)){
     if(event.key=='Backspace'){
-        str=Backspace(str);
+        str=Backspace();
         document.getElementById("text-area").textContent=str;
     }
     else if(event.key=="Enter" || (event.key=="=")){
@@ -59,10 +57,12 @@ document.addEventListener('keydown',function(event){
             window.alert("Limit exceeded!");
         }
         else{
+        if (str=="Syntax Error"||str=="Infinity"||str=="undefined"||str=="0"){
+            str="";
+        }
         str+=event.key;
         document.getElementById("text-area").textContent=str;
-        }
     }
-    console.log("VAR");
+}
 }
 });
